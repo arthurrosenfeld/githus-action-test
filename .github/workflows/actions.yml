@@ -1,8 +1,21 @@
 name: Action Workflow
 
 on:
-  repository_dispatch:
-    types: [build]
+  push:
+    branches:
+      - master
+      - "feature/*"  # matches geature/featA , feature/featB , doesn"t match feature/feat/a
+      - "feature/**" # matches to feature/feat/a
+      - "!feature/featC"
+    tags:
+      - v1.*
+    path:
+      - "**.js"
+      - "!filename.js"
+    # paths-ignore:
+    #   - "docs/**"
+  #repository_dispatch:
+  #  types: [build]
   #schedule:
   #  - cron: "0 1 1 1 *"
   #  - cron: "0/6 * * * *"
